@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Optics", "Optics\Optics.fsproj", "{03B033EF-77DF-4907-886A-CFEF3E3F0E77}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Optics.Tests", "Optics.Tests\Optics.Tests.fsproj", "{666393A9-EB15-49BE-B0DC-97193B01F0A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03B033EF-77DF-4907-886A-CFEF3E3F0E77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03B033EF-77DF-4907-886A-CFEF3E3F0E77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03B033EF-77DF-4907-886A-CFEF3E3F0E77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03B033EF-77DF-4907-886A-CFEF3E3F0E77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{666393A9-EB15-49BE-B0DC-97193B01F0A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{666393A9-EB15-49BE-B0DC-97193B01F0A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{666393A9-EB15-49BE-B0DC-97193B01F0A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{666393A9-EB15-49BE-B0DC-97193B01F0A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
