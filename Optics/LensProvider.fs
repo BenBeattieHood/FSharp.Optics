@@ -8,9 +8,9 @@ open ProviderImplementation.ProvidedTypes
 open System.Reflection
 
 [<TypeProvider>]
-type LensProvider (config : TypeProviderConfig) as this =
+type _LensProvider (config : TypeProviderConfig) as this =
     inherit TypeProviderForNamespaces ()
-
+    
     let ns = "Optics"
     let asm = Assembly.GetExecutingAssembly()
     let ctxt = ProvidedTypesContext.Create(config)
@@ -35,7 +35,7 @@ type LensProvider (config : TypeProviderConfig) as this =
             | ([| :? string as assemblyPath |]) ->
                 let provider = ProvidedTypeDefinition(asm, ns, typeName, Some typeof<obj>, HideObjectMethods = true)
 
-                let sourceAssembly = System.Reflection.Assembly.LoadFile assemblyPath
+                let sourceAssembly = System.Reflection.Assembly.LoadFile config.RuntimeAssembly
 
                 for t in types do
                     let method = ProvidedMethod(t.Name, [ProvidedParameter("arg", typeof<unit>)], typeof<unit>)

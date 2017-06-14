@@ -10,8 +10,7 @@ type Test2 = {
     firstName: string
 }
 
-type Bear = StaticProperty.Provided.LensProvider<"">
+type Bear = Optics.LensProvider<"">
 
-
-//let asd = Bear.Test1 ()
+//let asd = Bear.
 ()

@@ -5,14 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>03b033ef-77df-4907-886a-cfef3e3f0e77</ProjectGuid>
+    <ProjectGuid>6b9eb119-a450-41f9-9e3b-27f9dbc28520</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Optics</RootNamespace>
-    <AssemblyName>Optics</AssemblyName>
+    <RootNamespace>Compilation</RootNamespace>
+    <AssemblyName>Compilation</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.1.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>Optics</Name>
+    <Name>Compilation</Name>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -24,10 +24,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <DocumentationFile>bin\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
-    <StartAction>Program</StartAction>
-    <StartProgram>C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe</StartProgram>
-    <StartArguments>"C:\dev\FSharp.Optics\Optics\Optics.fsproj"</StartArguments>
-    <StartWorkingDirectory>C:\dev\FSharp.Optics\Optics\</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -54,24 +50,11 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-  </Target>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="ProvidedTypes.fsi" />
-    <Compile Include="ProvidedTypes.fs" />
-    <Compile Include="AssemblyReader.fs" />
-    <Compile Include="AssemblyReaderReflection.fs" />
-    <Compile Include="ProvidedTypesTesting.fs" />
-    <Compile Include="ProvidedTypesContext.fs" />
-    <Compile Include="CoreExt.fs" />
-    <Compile Include="LensAttribute.fs" />
-    <Compile Include="LensProvider.fs" />
+    <Compile Include="MemoryFS.fs" />
+    <Compile Include="Compilation.fs" />
     <Content Include="packages.config" />
-    <Compile Include="Sandbox.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Compiler.Service">
@@ -80,28 +63,16 @@
     <Reference Include="FSharp.Compiler.Service.MSBuild.v12">
       <HintPath>..\packages\FSharp.Compiler.Service.12.0.8\lib\net45\FSharp.Compiler.Service.MSBuild.v12.dll</HintPath>
     </Reference>
-    <Reference Include="FSharp.Control.AsyncSeq">
-      <HintPath>..\packages\FSharp.Control.AsyncSeq.1.13\lib\net40\FSharp.Control.AsyncSeq.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharp.Core">
-      <HintPath>..\packages\FSharp.Core.4.1.17\lib\net45\FSharp.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpx.Async">
-      <HintPath>..\packages\FSharpx.Async.1.13.2\lib\net45\FSharpx.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpx.Collections">
-      <HintPath>..\packages\FSharpx.Collections.1.16.0\lib\net40\FSharpx.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpx.Core">
-      <HintPath>..\packages\FSharpx.Core.1.8.32\lib\40\FSharpx.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharpx.Extras">
-      <HintPath>..\packages\FSharpx.Extras.2.2.1\lib\net45\FSharpx.Extras.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core">
+      <Name>FSharp.Core</Name>
+      <AssemblyName>FSharp.Core.dll</AssemblyName>
+      <HintPath>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\FSharp\.NETFramework\v4.0\$(TargetFSharpCoreVersion)\FSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable">
       <HintPath>..\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -112,9 +83,13 @@
       <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <PropertyGroup>
-    <PreBuildEvent>$(SolutionDir)\BuildProcess\PreBuildEvents.bat  "$(TargetPath)"  "$(TargetFileName)"  "$(TargetDir)"  "$(TargetName)"</PreBuildEvent>
-  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FSharpResult\FSharpResult\FSharpResult.fsproj">
+      <Name>FSharpResult</Name>
+      <Project>{d054483f-9820-45c2-b52c-dce7894583b7}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
